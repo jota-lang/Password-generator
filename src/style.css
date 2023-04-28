@@ -1,0 +1,143 @@
+*{
+    margin:0%;
+    padding: 0%;
+}
+body{
+    background-color: #121117;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+}
+.content{
+    width: 350px;
+    height:380px;
+    background-color: #24232b;
+}
+.contentPassword{
+    margin-bottom: 15px;
+    width: 350px;
+    height:60px;
+    background-color: #24232b;
+}
+.contentPassword p{
+    font-size: 22px;
+    padding-top: 15px;
+    margin-left: 1em;
+    color:#54535b;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+}
+h1{
+    font-size: 15px;
+    color: #7e7c89;
+    margin-bottom: 1em;
+    font-family: 'Roboto Mono', monospace;
+}
+header{
+    color: #e3e2ea;
+    margin-top: 2em;
+    margin-left: 2em;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 400;
+}
+.count{
+    float: right;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 20px;
+    color: #a4ffaf;
+    margin-right:30px ;
+    margin-top: -25px;
+
+}
+#select{
+    -webkit-appearance: none;
+    margin-left: 23px;
+    margin-top: 2em;
+    height: 5px;
+    width: 32em;
+    background-color: #18171f;
+    outline: none;
+}
+#select::-webkit-slider-thumb{
+    width: 20px;
+    height: 20px;
+    background: #ffffff
+}
+.listCheck{
+    display: flex;
+    flex-direction: column;
+    color: #e3e2ea;
+    font-family: 'Roboto Mono', monospace;
+    
+}
+.listCheck input{
+   float: left;
+   margin-left: 3em;
+}
+.listCheck label{
+    margin-left: 1em;
+}
+.check{
+    margin-top: 20px;
+}
+.strength{
+    margin-left: 2em;
+    margin-top: 2em;
+    width: 300px;
+    height:50px;
+    background-color: #18171f;
+}
+p{
+    padding-top: 15px;
+    margin-left: 2em;
+    color:#83818f;
+    font-family: 'Roboto Mono', monospace;
+}
+.buttonGenerator{
+    background-color: #a4ffaf;
+    border: #a4ffaf;
+    margin-top: 2em;
+    margin-left: 25px;
+    width: 300px;
+    height:50px;
+}
+.buttonGenerator p{
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    font-size: 12px;
+    color: #121117;
+    margin-right: 60px;
+    margin-top: -36px;
+
+}
+.icon{
+    color: #a4ffaf;
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+}
+
+.copyIcon{
+    background-color: #24232b ;
+    border: none;
+    margin-left: 32em;
+    margin-top: 20px;
+} 
+.password{
+    margin-top: -50px;
+}
+.arrow{
+    width: 20px;
+    height: 20px;
+    margin-left: 60px;
+}
+
+.buttonGenerator:active{
+    background-color:#24232b;
+    border: 2px solid #a4ffaf;
+}
