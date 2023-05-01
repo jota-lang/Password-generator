@@ -9,50 +9,67 @@ function App()
 {
   //hooks
   const [inputValue, setInputValue] = useState('');
-  const inputRef = useRef(inputValue);
+  useRef(inputValue);
   const [Length, setLength] = useState(0);
   const [password, setPassword] = useState('P4$5W0rD');
   const [icon, setIcon] = useState(<BiCopyAlt/>);
 
   //functions
   const handleInput = (event) => {
-    setInputValue(event.target.value);
+    const { value, checked } = event.target;
+    setInputValue((prevState) =>
+      checked ? [...prevState, value] : prevState.filter((v) => v !== value)
+    );
   }
-
   const handleInputRange = (event) => {
     setLength(parseInt(event.target.value));
   }
-
   const createPassword = () =>{
-    let newPassword = ''; 
-    const regex = /^[a-zA-Z0-9!@#$%*?]*$/;
+    let newPassword = '';
+    const symbols = '!@#$%*?';
     const length = parseInt(Length);
+    const includeUppercase = inputValue.includes('uppercase');
+    const includeLowercase = inputValue.includes('lowercase');
+    const includeNumber = inputValue.includes('number');
+    const includeSymbol = inputValue.includes('symbols');
     
     for (let i = 0; i < length; i++) {
-        newPassword += regex.source.charAt(Math.floor(Math.random() * regex.source.length));
+      let newChar = '';
+     
+      if (includeUppercase && includeLowercase && includeNumber && includeSymbol) {
+        // se ambas as opções estiverem marcadas, escolher aleatoriamente entre maiúsculas e minúsculas
+        newChar = Math.random() < 0.5 ? String.fromCharCode(Math.floor(Math.random() * (90 - 65 + 1)) + 65) : String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97);
+      } else if (includeUppercase) {
+        // se somente a opção "Include Uppercase Letters" estiver marcada, escolher uma letra maiúscula aleatória
+        newChar = String.fromCharCode(Math.floor(Math.random() * (90 - 65 + 1)) + 65);
+      } else if (includeLowercase) {
+        // se somente a opção "Include Lowercase Letters" estiver marcada, escolher uma letra minúscula aleatória
+        newChar = String.fromCharCode(Math.floor(Math.random() * (122 - 97 + 1)) + 97);
+      }else if(includeNumber){
+        //exibir somente numeros
+        newChar = Math.floor(Math.random() * Length);
+      }else if(includeSymbol){
+        //exibir somente simbolos
+        newChar = symbols.charAt(Math.floor(Math.random() * symbols.length));
+      }else{
+        newChar = '';
       }
+        newPassword += newChar;
+    }
       setPassword(newPassword);
-      console.log('newPassword',newPassword);
-
-      if(inputValue ==='uppercase'){
-        let upperLetters= newPassword.toUpperCase();
-        console.log('teste maiusculo',upperLetters);
-      }
-      if(inputValue ==='lowercase'){
-        let lowerLetters= newPassword.toLowerCase();
-        console.log('teste minusculo',lowerLetters);
-      }
-      if(inputValue ==='number'){
-      }
-      if(inputValue ==='symbols'){
-        console.log('e simbolo');
-      }
+      setIcon(<BiCopyAlt/>);
+      console.log(newPassword);//teste de exibição
+    }
+  const copy = () =>{
+    const newImg = <AiOutlineCopy/> 
+      navigator.clipboard.writeText(password)
+      .then(() => {     
+        setIcon(newImg);
+      })
+      .catch((error) => {
+        console.error('Failed to copy password: ', error)
+      })
   }
-    const copy = () =>{
-      const newImg = <AiOutlineCopy/> 
-      setIcon(newImg);
-  }
-    
   //JSX
   return (
    <div className='container'>
@@ -74,19 +91,19 @@ function App()
       <div className='listCheck'>
         <div className='check'> 
           <label for="op1">Include Uppercase Letters</label>
-          <input type='checkbox' id='op1' name='op1' value='uppercase' onClick={handleInput}></input>
+          <input type='checkbox' id='op1' value='uppercase' onClick={handleInput}></input>
         </div>
         <div className='check'> 
           <label for="op2">Include Lowercase Letters</label>
-          <input type='checkbox' id='op2' name='op2' value='lowercase'onClick={handleInput} ></input>
+          <input type='checkbox' id='op2' value='lowercase'onClick={handleInput} ></input>
         </div>
         <div className='check'> 
           <label for="op3">Include Numbers</label>
-          <input type='checkbox' id='op3' name='op3' value='number'onClick={handleInput}></input>
+          <input type='checkbox' id='op3' value='number'onClick={handleInput}></input>
         </div>
         <div className='check'> 
           <label for="op4">Include Symbols</label>
-          <input type='checkbox' id='op4' name='op4' value='symbols'onClick={handleInput}></input>
+          <input type='checkbox' id='op4' value='symbols'onClick={handleInput}></input>
         </div>
       </div>
       <div className='strength'>
